@@ -19,14 +19,14 @@ wrapper.addEventListener("click", () => {
 
     wrapper.classList.add("expanded");
 
-    audio.volume = 0.6;
+    wrapper.addEventListener("transitionend", () => {
+        audio.volume = 0.6;
+        audio.loop = true;
 
-    console.log(audio);
-
-    // 👉 spustí jen pokud ještě nehraje
-    if (audio.paused) {
-        audio.play().catch(err => {
-            console.log("Audio blocked:", err);
-        });
-    }
+        if (audio.paused) {
+            audio.play().catch(err => {
+                console.log("Audio blocked:", err);
+            });
+        }
+    }, { once: true });
 });
